@@ -1,4 +1,5 @@
-import numpy as np
+from jax import numpy as np
+import numpy as cnp
 import heapq
 import warnings
 import itertools as itt
@@ -1940,11 +1941,11 @@ class AbelianTensor(TensorCommon):
                 if sparse and maxchi < min(v.shape) - 1:
                     if hermitian:
                         s, u = spsla.eighs(
-                            v, k=maxchi, return_eigenvectors=True
+                            cnp.array(v), k=maxchi, return_eigenvectors=True
                         )
                     else:
                         s, u = spsla.eigs(
-                            v, k=maxchi, return_eigenvectors=True
+                            cnp.array(v), k=maxchi, return_eigenvectors=True
                         )
                 else:
                     if hermitian:
@@ -2107,7 +2108,7 @@ class AbelianTensor(TensorCommon):
             else:
                 if sparse and maxchi < min(v.shape) - 1:
                     u, s, v = spsla.svds(
-                        v, k=maxchi, return_singular_vectors=True
+                        cnp.array(v), k=maxchi, return_singular_vectors=True
                     )
                     order = np.argsort(-s)
                     u = u[:, order]

@@ -1,4 +1,4 @@
-import numpy as np
+from jax import numpy as np
 import itertools as itt
 import functools as fct
 import warnings
