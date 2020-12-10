@@ -1,4 +1,5 @@
 from jax import numpy as np
+import numpy as cnp
 import itertools as itt
 import functools as fct
 import warnings
@@ -33,7 +34,7 @@ class TensorCommon:
     @classmethod
     def random(cls, *args, **kwargs):
         """Initialize a tensor of given form with np.random.random_sample."""
-        return cls.initialize_with(np.random.random_sample, *args, **kwargs)
+        return cls.initialize_with(lambda arg: np.array(cnp.random.random_sample(arg)), *args, **kwargs)
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     # Miscellaneous

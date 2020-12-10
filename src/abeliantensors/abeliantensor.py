@@ -783,7 +783,7 @@ class AbelianTensor(TensorCommon):
         """
         # Create an ndarray of the right shape, filled with self.defval.
         ndshape = type(self).flatten_shape(self.shape)
-        res = np.full(ndshape, self.defval, dtype=self.dtype)
+        res = cnp.full(ndshape, self.defval, dtype=self.dtype)
         if 0 in ndshape:
             return res
         shp, qhp = type(self)._sorted_shape_qhape(tensor=self)
