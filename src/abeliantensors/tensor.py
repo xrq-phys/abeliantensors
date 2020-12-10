@@ -1,4 +1,5 @@
-import numpy as np
+from autograd import numpy as np
+import numpy as cnp
 import operator as opr
 import functools as fct
 import scipy.sparse.linalg as spsla
@@ -495,9 +496,9 @@ class Tensor(TensorCommon, np.ndarray):
         maxchi = max(chis)
         if sparse and maxchi < mindim - 1:
             if hermitian:
-                S, U = spsla.eigsh(self, k=maxchi, return_eigenvectors=True)
+                S, U = spsla.eigsh(cnp.array(self), k=maxchi, return_eigenvectors=True)
             else:
-                S, U = spsla.eigs(self, k=maxchi, return_eigenvectors=True)
+                S, U = spsla.eigs(cnp.array(self), k=maxchi, return_eigenvectors=True)
             norm_sq = self.norm_sq()
         else:
             if hermitian:
@@ -580,7 +581,7 @@ class Tensor(TensorCommon, np.ndarray):
         mindim = min(self.shape)
         maxchi = max(chis)
         if sparse and maxchi < mindim - 1:
-            U, S, V = spsla.svds(self, k=maxchi, return_singular_vectors=True)
+            U, S, V = spsla.svds(cnp.array(self), k=maxchi, return_singular_vectors=True)
             norm_sq = self.norm_sq()
         else:
             U, S, V = np.linalg.svd(self, full_matrices=False)

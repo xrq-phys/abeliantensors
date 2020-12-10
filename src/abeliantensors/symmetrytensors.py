@@ -1,4 +1,4 @@
-import numpy as np
+from autograd import numpy as np
 from .abeliantensor import AbelianTensor
 from collections.abc import Iterable
 

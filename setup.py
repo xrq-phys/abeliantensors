@@ -22,7 +22,7 @@ setuptools.setup(
         "Topic :: Scientific/Engineering",
     ],
     keywords=["tensor", "tensor networks", "linear algebra"],
-    install_requires=["scipy>=1.0.0"],
+    install_requires=["scipy>=1.0.0", "autograd>=1.0"],
     extras_require={
         "tests": ["ncon", "pytest", "pytest-randomly", "coverage"],
         "demo": ["ncon", "timeit", "matplotlib", "seaborn"],

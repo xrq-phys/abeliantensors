@@ -1,4 +1,5 @@
-import numpy as np
+from autograd import numpy as np
+import numpy as cnp
 import heapq
 import warnings
 import itertools as itt
@@ -782,7 +783,7 @@ class AbelianTensor(TensorCommon):
         """
         # Create an ndarray of the right shape, filled with self.defval.
         ndshape = type(self).flatten_shape(self.shape)
-        res = np.full(ndshape, self.defval, dtype=self.dtype)
+        res = cnp.full(ndshape, self.defval, dtype=self.dtype)
         if 0 in ndshape:
             return res
         shp, qhp = type(self)._sorted_shape_qhape(tensor=self)
@@ -1940,11 +1941,11 @@ class AbelianTensor(TensorCommon):
                 if sparse and maxchi < min(v.shape) - 1:
                     if hermitian:
                         s, u = spsla.eighs(
-                            v, k=maxchi, return_eigenvectors=True
+                            cnp.array(v), k=maxchi, return_eigenvectors=True
                         )
                     else:
                         s, u = spsla.eigs(
-                            v, k=maxchi, return_eigenvectors=True
+                            cnp.array(v), k=maxchi, return_eigenvectors=True
                         )
                 else:
                     if hermitian:
@@ -2107,7 +2108,7 @@ class AbelianTensor(TensorCommon):
             else:
                 if sparse and maxchi < min(v.shape) - 1:
                     u, s, v = spsla.svds(
-                        v, k=maxchi, return_singular_vectors=True
+                        cnp.array(v), k=maxchi, return_singular_vectors=True
                     )
                     order = np.argsort(-s)
                     u = u[:, order]
